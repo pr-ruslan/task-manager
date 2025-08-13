@@ -55,6 +55,6 @@ class Task(models.Model):
 
     def __str__(self):
         return (
-            f"{self.name}, priority:{self.get_priority_display()} "
+            f"{self.name}, priority: {self.get_priority_display()} "
             f"[{'Done' if self.is_completed else 'In progress'}]"
         )
