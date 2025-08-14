@@ -3,7 +3,10 @@ from django.urls import reverse_lazy
 from django.views import generic
 
 from manager.models import (
-    Worker
+    Worker,
+    Task,
+    Position,
+    TaskType,
 )
 
 def index(request):
@@ -33,3 +36,23 @@ class WorkerUpdateView(generic.UpdateView):
 class WorkerDeleteView(generic.DeleteView):
     model = Worker
     success_url = reverse_lazy("manager:workers-list")
+
+
+class TaskListView(generic.ListView):
+    model = Task
+
+
+class TaskDetailView(generic.DetailView):
+    model = Task
+
+
+class TaskCreateView(generic.CreateView):
+    model = Task
+
+
+class TaskUpdateView(generic.UpdateView):
+    model = Task
+
+
+class TaskDeleteView(generic.DeleteView):
+    model = Task
