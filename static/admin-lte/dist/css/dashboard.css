@@ -1,9 +1,10 @@
-.small-box {
-    transition: background-color 0.2s ease, transform 0.2s ease;
+.col-lg-4.col-12 .small-box {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
 }
 
-.small-box:hover {
-    filter: brightness(90%);
-    transform: translateY(-3px);
-    cursor: pointer;
+/* Hover effect */
+.col-lg-4.col-12 .small-box:hover {
+    transform: scale(1.05); /* Slightly enlarge */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Soft shadow */
 }

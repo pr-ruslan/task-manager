@@ -15,7 +15,7 @@ def index(request):
     tasks_incomplete_count = Task.objects.filter(is_completed=False).count()
     workers_count = Worker.objects.count()
 
-    return render(request, "adminlte/index.html", {
+    return render(request, "manager/pages/index.html", {
         "tasks_count": tasks_count,
         "tasks_incomplete_count": tasks_incomplete_count,
         "workers_count": workers_count,
