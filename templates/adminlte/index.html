@@ -1,12 +1,84 @@
 {% extends 'adminlte/base.html' %}
+{% load static %}
 
 {% block content %}
+<link rel="stylesheet" href="{% static 'admin-lte/dist/css/dashboard.css' %}">
+
 <div class="container-fluid">
-    <div class="row">
+
+    <!-- Intro Section -->
+    <div class="row mb-4">
         <div class="col-12">
-            <h2>Welcome to Run-Dom-Dot-Com manager</h2>
-            <p>This is your AdminLTE-based homepage.</p>
+            <h1 class="mb-3">Welcome to Run-Dom-Dot-Com Manager</h1>
+            <p>
+                <strong>Run-Dom-Dot-Com Manager</strong> is your all-in-one IT task management solution.
+                It helps you organize, assign, and track work efficiently, ensuring your team stays focused
+                and your projects move forward smoothly. With real-time updates and intuitive design,
+                it’s never been easier to manage your workflow.
+            </p>
         </div>
     </div>
+
+    <!-- Stats Section -->
+    <div class="row">
+        <!-- All Tasks -->
+        <div class="col-lg-4 col-12">
+            <a href="" class="text-decoration-none">
+                <div class="small-box bg-success">
+                    <div class="inner">
+                        <h3>{{ tasks_count }}</h3>
+                        <p>Tasks</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- In Progress -->
+        <div class="col-lg-4 col-12">
+            <a href="" class="text-decoration-none">
+                <div class="small-box bg-warning">
+                    <div class="inner">
+                        <h3>{{ tasks_incomplete_count }}</h3>
+                        <p>In Progress Tasks</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Workers -->
+        <div class="col-lg-4 col-12">
+            <a href="" class="text-decoration-none">
+                <div class="small-box bg-info">
+                    <div class="inner">
+                        <h3>{{ workers_count }}</h3>
+                        <p>Workers</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- Invitation Section -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <p>
+                Whether you're handling urgent issues, coordinating high-priority developments,
+                or simply keeping track of routine tasks — <strong>Run-Dom-Dot-Com Manager</strong>
+                empowers your team to work smarter, not harder.
+                Start using it today to boost productivity, streamline communication,
+                and ensure no task ever slips through the cracks.
+            </p>
+        </div>
+    </div>
+
 </div>
 {% endblock %}

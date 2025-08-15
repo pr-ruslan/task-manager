@@ -1,0 +1,9 @@
+.small-box {
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.small-box:hover {
+    filter: brightness(90%);
+    transform: translateY(-3px);
+    cursor: pointer;
+}
