@@ -18,7 +18,7 @@ app_name = "manager"
 
 
 workers_patterns = [
-    path('', WorkerListView.as_view(), name="workers-list"),
+    path("", WorkerListView.as_view(), name="workers-list"),
     path('<int:pk>/', WorkerDetailView.as_view(), name="worker-detail"),
     path('create/', WorkerCreateView.as_view(), name="worker-create"),
     path('<int:pk>/update/', WorkerUpdateView.as_view(), name="worker-update"),
@@ -26,7 +26,7 @@ workers_patterns = [
 ]
 
 tasks_patterns = [
-    path('', TaskListView.as_view(), name="task-list"),
+    path("", TaskListView.as_view(), name="task-list"),
     path('<int:pk>/', TaskDetailView.as_view(), name="task-detail"),
     path('create/', TaskCreateView.as_view(), name="task-create"),
     path('<int:pk>/update/', TaskUpdateView.as_view(), name="task-update"),

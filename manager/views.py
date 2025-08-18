@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views import generic
 
 from manager.models import (
@@ -15,7 +15,7 @@ def index(request):
     tasks_incomplete_count = Task.objects.filter(is_completed=False).count()
     workers_count = Worker.objects.count()
 
-    return render(request, "manager/pages/index.html", {
+    return render(request, "manager/index.html", {
         "tasks_count": tasks_count,
         "tasks_incomplete_count": tasks_incomplete_count,
         "workers_count": workers_count,

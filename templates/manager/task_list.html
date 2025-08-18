@@ -1,0 +1,95 @@
+{% extends 'manager/base.html' %}
+{% load static %}
+
+{% block title %}Task List{% endblock %}
+
+{% block page_name %}
+    Task List
+{% endblock %}
+
+{% block page_actions %}
+    <a href="{% url 'manager:task-create' %}" class="btn btn-success btn-sm">
+        <i class="fas fa-plus"></i> Add New Task
+    </a>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">All Tasks</h3>
+                    <div class="card-tools">
+                        <div class="input-group input-group-sm" style="width: 150px;">
+                            <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body table-responsive p-0">
+                    <table class="table table-hover text-nowrap">
+                        <thead>
+                            <tr>
+                                <th>Task</th>
+                                <th>Description</th>
+                                <th>Deadline</th>
+                                <th>Priority</th>
+                                <th>Status</th>
+                                <th>Assignees</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for task in task_list %}
+                                <tr>
+                                    <td>{{ task.name }}</td>
+                                    <td>{{ task.description|truncatechars:50 }}</td>
+                                    <td>{{ task.deadline|date:"F j, Y, P" }}</td>
+                                    <td>
+                                        <span class="badge 
+                                            {% if task.priority == 'UG' %}badge-danger
+                                            {% elif task.priority == 'HP' %}badge-warning
+                                            {% elif task.priority == 'RE' %}badge-info
+                                            {% else %}badge-secondary{% endif %}">
+                                            {{ task.get_priority_display }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="badge 
+                                            {% if task.is_completed %}badge-success{% else %}badge-primary{% endif %}">
+                                            {% if task.is_completed %}Done{% else %}In Progress{% endif %}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        {% for worker in task.assignees.all %}
+                                            {{ worker.get_full_name }}{% if not forloop.last %}, {% endif %}
+                                        {% empty %}
+                                            Unassigned
+                                        {% endfor %}
+                                    </td>
+                                    <td>
+                                        <a href="{% url 'manager:task-detail' task.pk %}" class="btn btn-info btn-sm">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <a href="{% url 'manager:task-update' task.pk %}" class="btn btn-warning btn-sm">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="{% url 'manager:task-delete' task.pk %}" class="btn btn-danger btn-sm">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% empty %}
+                                <tr>
+                                    <td colspan="7" class="text-center">No tasks found.</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
