@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.views import generic
 
+from manager.forms import WorkerForm, TaskForm
 from manager.models import (
     Worker,
     Task,
@@ -37,11 +38,14 @@ class WorkerDetailView(generic.DetailView):
 
 class WorkerCreateView(generic.CreateView):
     model = Worker
-    fields = '__all__'
+    form_class = WorkerForm
+    success_url = reverse_lazy("manager:workers-list")
 
 
 class WorkerUpdateView(generic.UpdateView):
     model = Worker
+    model_form_class = WorkerForm
+    success_url = reverse_lazy("manager:workers-list")
 
 
 class WorkerDeleteView(generic.DeleteView):

@@ -4,6 +4,7 @@ from .models import Task, Worker
 
 
 class TaskForm(forms.ModelForm):
+
     class Meta:
         model = Task
         fields = [
@@ -23,6 +24,7 @@ class TaskForm(forms.ModelForm):
 
 
 class WorkerForm(forms.ModelForm):
+
     class Meta:
         model = Worker
         fields = [
@@ -32,3 +34,4 @@ class WorkerForm(forms.ModelForm):
             "email",
             "position"
         ]
+
