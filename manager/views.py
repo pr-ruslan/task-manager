@@ -44,7 +44,7 @@ class WorkerCreateView(generic.CreateView):
 
 class WorkerUpdateView(generic.UpdateView):
     model = Worker
-    model_form_class = WorkerForm
+    form_class = WorkerForm
     success_url = reverse_lazy("manager:workers-list")
 
 
