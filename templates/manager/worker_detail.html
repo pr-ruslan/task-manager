@@ -1,0 +1,84 @@
+{% extends 'manager/base.html' %}
+{% load static %}
+
+{% block title %}{{ worker.username }}{% endblock %}
+
+{% block page_name %}
+    Worker Details: {{ worker.username }}
+{% endblock %}
+
+{% block page_actions %}
+    <a href="{% url 'manager:worker-update' worker.pk %}" class="btn btn-warning btn-sm">
+        <i class="fas fa-edit"></i> Edit
+    </a>
+    <a href="{% url 'manager:worker-delete' worker.pk %}" class="btn btn-danger btn-sm">
+        <i class="fas fa-trash"></i> Delete
+    </a>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card card-primary card-outline">
+                <div class="card-body box-profile">
+                    <div class="text-center">
+                        <img class="profile-user-img img-fluid img-circle"
+                             src="https://www.gravatar.com/avatar/{{ worker.email|lower }}?s=128&d=retro"
+                             alt="User profile picture">
+                    </div>
+                    <h3 class="profile-username text-center">{{ worker.get_full_name }}</h3>
+                    <p class="text-muted text-center">{{ worker.position }}</p>
+
+                    <ul class="list-group list-group-unbordered mb-3">
+                        <li class="list-group-item">
+                            <b>Username</b> <a class="float-right">{{ worker.username }}</a>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Email</b> <a class="float-right">{{ worker.email }}</a>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Active</b>
+                            <a class="float-right">
+                                {% if worker.is_active %}
+                                    <span class="badge badge-success">Yes</span>
+                                {% else %}
+                                    <span class="badge badge-danger">No</span>
+                                {% endif %}
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Last Login</b> <a class="float-right">{{ worker.last_login|date:"F j, Y, P"|default:"Never" }}</a>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Member Since</b> <a class="float-right">{{ worker.date_joined|date:"F j, Y" }}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card card-info">
+                <div class="card-header">
+                    <h3 class="card-title">Assigned Tasks</h3>
+                </div>
+                <div class="card-body">
+                    {% if worker.tasks.all %}
+                        <ul class="list-group">
+                            {% for task in worker.tasks.all %}
+                                <li class="list-group-item">
+                                    <a href="{% url 'manager:task-detail' task.pk %}">{{ task.name }}</a>
+                                    <span class="float-right badge 
+                                        {% if task.is_completed %}badge-success{% else %}badge-primary{% endif %}">
+                                        {% if task.is_completed %}Done{% else %}In Progress{% endif %}
+                                    </span>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p class="text-center">No tasks assigned to this worker.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
