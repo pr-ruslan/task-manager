@@ -14,14 +14,25 @@
         <!-- Sidebar user panel -->
         {% block user_panel %}
         <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="{% avatar_url size=90 %}" class="img-circle elevation-2" alt="User Image">
-        </div>
-        <div class="info">
-          <a href="#" class="d-block">{% firstof request.user.get_full_name request.user.username %}</a>
-        </div>
-      </div>
+
+        {% if user.is_authenticated %}
+          <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+              <img src="{% avatar_url size=90 %}" class="img-circle elevation-2" alt="User Image">
+            </div>
+            <div class="info">
+              <a href="{% url 'manager:worker-detail' user.pk %}" class="d-block">{{ user.username }}</a>
+              <a href="{% url 'manager:logout' %}" class="d-block">Log out</a>
+            </div>
+          </div>
+        {% else %}
+          <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="info">
+              <a href="{% url 'manager:login' %}" class="d-block">Log in</a>
+            </div>
+          </div>
+        {% endif %}
+
         {% endblock %}
 
         {% block form %}{% endblock %}

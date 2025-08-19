@@ -1,0 +1,56 @@
+{% extends "manager/base.html" %}
+{% load static %}
+{% load adminlte_helpers %}
+
+{% block body_class %}login-page{% endblock %}
+
+{% block body %}
+<div class="login-box">
+  <div class="login-logo">
+    <a href="{% url 'manager:index' %}"><b>Run-Dom-Dot-Com</b>Manager</a>
+  </div>
+  <div class="card">
+    <div class="card-body login-card-body">
+      <p class="login-box-msg">Sign in to start your session</p>
+
+      <form method="post">
+        {% csrf_token %}
+        <div class="input-group mb-3">
+          <input type="text" name="username" class="form-control" placeholder="Username" required>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="password" name="password" class="form-control" placeholder="Password" required>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8">
+            <div class="icheck-primary">
+              <input type="checkbox" id="remember">
+              <label for="remember">
+                Remember Me
+              </label>
+            </div>
+          </div>
+          <div class="col-4">
+            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+          </div>
+          </div>
+        {% if form.errors %}
+          <div class="alert alert-danger mt-3">
+            Your username and password didn't match. Please try again.
+          </div>
+        {% endif %}
+      </form>
+    </div>
+    </div>
+</div>
+{% endblock %}
