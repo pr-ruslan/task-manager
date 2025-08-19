@@ -1,0 +1,32 @@
+{% extends 'manager/base.html' %}
+{% load static %}
+
+{% block title %}Confirm Deletion{% endblock %}
+
+{% block page_name %}
+    Delete {{ object_name }}
+{% endblock %}
+
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card card-danger">
+                <div class="card-header">
+                    <h3 class="card-title">Are you sure?</h3>
+                </div>
+                <div class="card-body">
+                    <p>Are you sure you want to DELETE </p>  
+                  <h3>{{ object }}?</h3>
+                    <p class="text-danger">This action cannot be undone.</p>
+                </div>
+                <div class="card-footer">
+                    <form method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Yes, I'm sure</button>
+                        <a href="{% url 'manager:task-list' %}" class="btn btn-default">Cancel</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
