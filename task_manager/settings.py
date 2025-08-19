@@ -119,8 +119,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "manager.Worker"
 
-LOGIN_URL = "/registration/login/"
+LOGIN_URL = "/accounts/login/"
 
-LOGIN_REDIRECT_URL = "/"
+LOGIN_REDIRECT_URL = "manager:index"
 
-LOGOUT_REDIRECT_URL = None
+LOGOUT_REDIRECT_URL = "/accounts/login/"
