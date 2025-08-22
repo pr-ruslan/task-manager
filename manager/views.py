@@ -18,16 +18,20 @@ def index(request):
     tasks_incomplete_count = Task.objects.filter(is_completed=False).count()
     workers_count = Worker.objects.count()
 
-    return render(request, "manager/index.html", {
-        "tasks_count": tasks_count,
-        "tasks_incomplete_count": tasks_incomplete_count,
-        "workers_count": workers_count,
-    })
-
+    return render(
+        request,
+        "manager/index.html",
+        {
+            "tasks_count": tasks_count,
+            "tasks_incomplete_count": tasks_incomplete_count,
+            "workers_count": workers_count,
+        },
+    )
 
 
 class WorkerListView(LoginRequiredMixin, generic.ListView):
     model = Worker
+
     def get_queryset(self):
         self.queryset = super().get_queryset()
         q = self.request.GET.get("q")
@@ -38,7 +42,7 @@ class WorkerListView(LoginRequiredMixin, generic.ListView):
         return self.queryset
 
     class Meta:
-        ordering = ['username']
+        ordering = ["username"]
 
 
 class WorkerDetailView(LoginRequiredMixin, generic.DetailView):
@@ -89,10 +93,12 @@ class TaskCreateView(LoginRequiredMixin, generic.CreateView):
     form_class = TaskForm
     success_url = reverse_lazy("manager:task-list")
 
+
 class TaskUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Task
     form_class = TaskForm
     success_url = reverse_lazy("manager:task-list")
+
 
 class TaskDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Task

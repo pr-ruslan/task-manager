@@ -3,9 +3,8 @@ from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.test import TestCase
 
-from manager.models import (Position,
-                            Task,
-                            TaskType)
+from manager.models import Position, Task, TaskType
+
 
 class ModelTests(TestCase):
     def setUp(self):
@@ -39,14 +38,17 @@ class ModelTests(TestCase):
         self.task.assignees.set([self.user])
 
     def test_worker_string(self):
-        self.assertEqual(str(self.user), f"{self.user.username} ({self.user.position.name})")
+        self.assertEqual(
+            str(self.user), f"{self.user.username} ({self.user.position.name})"
+        )
 
     def test_task_string(self):
         self.assertEqual(
-            str(self.task), (
+            str(self.task),
+            (
                 f"{self.task.name}, priority: {self.task.get_priority_display()} "
                 f"[{'Done' if self.task.is_completed else 'In progress'}]"
-            )
+            ),
         )
 
     def test_password_is_correct(self):

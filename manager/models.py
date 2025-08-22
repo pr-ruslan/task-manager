@@ -10,15 +10,17 @@ class Position(models.Model):
 
 
 class Worker(AbstractUser):
-        position = models.ForeignKey("Position",
-                                     on_delete=models.CASCADE,
-                                     related_name="workers",)
+    position = models.ForeignKey(
+        "Position",
+        on_delete=models.CASCADE,
+        related_name="workers",
+    )
 
-        class Meta:
-            ordering = ["username"]
+    class Meta:
+        ordering = ["username"]
 
-        def __str__(self):
-            return f"{self.username} ({self.position.name})"
+    def __str__(self):
+        return f"{self.username} ({self.position.name})"
 
 
 class TaskType(models.Model):
@@ -45,9 +47,11 @@ class Task(models.Model):
         choices=PRIORITY_CHOICES,
         default="RE",
     )
-    task_type = models.ForeignKey("TaskType",
-                                  on_delete=models.CASCADE,
-                                  related_name="tasks",)
+    task_type = models.ForeignKey(
+        "TaskType",
+        on_delete=models.CASCADE,
+        related_name="tasks",
+    )
     assignees = models.ManyToManyField(
         Worker,
         related_name="tasks",

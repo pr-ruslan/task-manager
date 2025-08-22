@@ -33,7 +33,12 @@ class PublicViewTest(TestCase):
 
     def test_views_unauthorized(self):
         for url_name in DETAILED_URL_VIEWS:
-            url = reverse(f"{APP_NAME}:{url_name}", args=[1, ])
+            url = reverse(
+                f"{APP_NAME}:{url_name}",
+                args=[
+                    1,
+                ],
+            )
             response = self.client.get(url)
             self.assertNotEquals(response.status_code, 200)
 
@@ -88,13 +93,16 @@ class PrivateViewTest(TestCase):
         self.assertEqual(list(res.context["worker_list"]), [self.user])
 
     def test_worker_create_view(self):
-        res = self.client.post(reverse("manager:worker-create"), {
-            "username": "newworker",
-            "password": "password123",
-            "first_name": "New",
-            "last_name": "Worker",
-            "position": self.position.pk, # Add this line
-        })
+        res = self.client.post(
+            reverse("manager:worker-create"),
+            {
+                "username": "newworker",
+                "password": "password123",
+                "first_name": "New",
+                "last_name": "Worker",
+                "position": self.position.pk,  # Add this line
+            },
+        )
         self.assertRedirects(res, reverse("manager:workers-list"))
         self.assertTrue(get_user_model().objects.filter(username="newworker").exists())
 

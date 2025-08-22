@@ -17,23 +17,17 @@ class TestForms(TestCase):
             "is_completed",
             "priority",
             "task_type",
-            "assignees"
+            "assignees",
         ]
         for field in expected_fields:
             self.assertIn(field, self.task_form.fields)
 
     def test_task_form_deadline_widget(self):
-        widget = self.task_form.fields['deadline'].widget
+        widget = self.task_form.fields["deadline"].widget
         self.assertIsInstance(widget, DateTimeInput)
         self.assertEqual(widget.input_type, "datetime-local")
 
     def test_worker_form_contain_fields(self):
-        expected_fields = [
-            "username",
-            "first_name",
-            "last_name",
-            "email",
-            "position"
-        ]
+        expected_fields = ["username", "first_name", "last_name", "email", "position"]
         for field in expected_fields:
             self.assertIn(field, self.worker_form.fields)

@@ -14,12 +14,10 @@ class TaskForm(forms.ModelForm):
             "is_completed",
             "priority",
             "task_type",
-            "assignees"
+            "assignees",
         ]
         widgets = {
-            "deadline": forms.DateTimeInput(
-                attrs={"type": "datetime-local"}
-            ),
+            "deadline": forms.DateTimeInput(attrs={"type": "datetime-local"}),
         }
 
 
@@ -27,11 +25,4 @@ class WorkerForm(forms.ModelForm):
 
     class Meta:
         model = Worker
-        fields = [
-            "username",
-            "first_name",
-            "last_name",
-            "email",
-            "position"
-        ]
-
+        fields = ["username", "first_name", "last_name", "email", "position"]
