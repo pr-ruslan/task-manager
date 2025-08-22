@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
@@ -27,6 +28,14 @@ def index(request):
 
 class WorkerListView(LoginRequiredMixin, generic.ListView):
     model = Worker
+    def get_queryset(self):
+        self.queryset = super().get_queryset()
+        q = self.request.GET.get("q")
+        if q:
+            self.queryset = self.queryset.filter(
+                Q(first_name__icontains=q) | Q(username__icontains=q)
+            )
+        return self.queryset
 
     class Meta:
         ordering = ['username']
@@ -59,8 +68,15 @@ class TaskListView(LoginRequiredMixin, generic.ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        if self.request.GET.get("uncompleted"):
+        q = self.request.GET.get("q")
+
+        if self.request.GET.get("status") == "incompleted":
             queryset = queryset.filter(is_completed=False)
+        if q:
+            queryset = queryset.filter(
+                Q(name__icontains=q) | Q(description__icontains=q)
+            )
+
         return queryset
 
 
@@ -76,7 +92,7 @@ class TaskCreateView(LoginRequiredMixin, generic.CreateView):
 class TaskUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Task
     form_class = TaskForm
-    success_url = reverse_lazy("manager:tasks-list")
+    success_url = reverse_lazy("manager:task-list")
 
 class TaskDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Task

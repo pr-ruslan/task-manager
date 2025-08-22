@@ -18,15 +18,21 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">All Tasks</h3>
-                    <div class="card-tools">
-                        <div class="input-group input-group-sm" style="width: 150px;">
-                            <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-                            <div class="input-group-append">
-                                <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
-                            </div>
-                        </div>
-                    </div>
+                    {% if request.GET.q %}
+                      <p class="card-title">Search results for "{{ request.GET.q }}"</p>
+                      {% elif request.GET.status %}
+                      <p class="card-title">{{ request.GET.status|capfirst }} tasks</p>
+                      {% else %}
+                      <p class="card-title">All Tasks</p>
+                    {% endif %}
+{#                    <div class="card-tools">#}
+{#                        <div class="input-group input-group-sm" style="width: 150px;">#}
+{#                            <input type="text" name="table_search" class="form-control float-right" placeholder="Search">#}
+{#                            <div class="input-group-append">#}
+{#                                <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
                 </div>
                 <div class="card-body table-responsive p-0">
                     <table class="table table-hover text-nowrap">
