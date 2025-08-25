@@ -1,0 +1,89 @@
+{% extends 'manager/base.html' %}
+{% load static %}
+
+{% block title %}{{ task.name }}{% endblock %}
+
+{% block page_name %}
+    Task Details: {{ task.name }}
+{% endblock %}
+
+{% block page_actions %}
+    <a href="{% url 'manager:task-update' task.pk %}" class="btn btn-warning btn-sm">
+        <i class="fas fa-edit"></i> Edit
+    </a>
+    <a href="{% url 'manager:task-delete' task.pk %}" class="btn btn-danger btn-sm">
+        <i class="fas fa-trash"></i> Delete
+    </a>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Task Information</h3>
+                </div>
+                <div class="card-body">
+                    <strong><i class="fas fa-align-left mr-1"></i> Description</strong>
+                    <p class="text-muted">{{ task.description }}</p>
+                    <hr>
+                    <strong><i class="fas fa-calendar-alt mr-1"></i> Deadline</strong>
+                    <p class="text-muted">{{ task.deadline|date:"F j, Y, P" }}</p>
+                    <hr>
+                    <strong><i class="fas fa-star mr-1"></i> Priority</strong>
+                    <p class="text-muted">
+                        <span class="badge 
+                            {% if task.priority == 'UG' %}badge-danger
+                            {% elif task.priority == 'HP' %}badge-warning
+                            {% elif task.priority == 'RE' %}badge-info
+                            {% else %}badge-secondary{% endif %}">
+                            {{ task.get_priority_display }}
+                        </span>
+                    </p>
+                    <hr>
+                    <strong><i class="fas fa-check-circle mr-1"></i> Status</strong>
+                    <p class="text-muted">
+                        <span class="badge 
+                            {% if task.is_completed %}badge-success{% else %}badge-primary{% endif %}">
+                            {% if task.is_completed %}Done{% else %}In Progress{% endif %}
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card card-secondary">
+                <div class="card-header">
+                    <h3 class="card-title">Assigned To</h3>
+                </div>
+                <div class="card-body">
+                    {% if task.assignees.all %}
+                        <ul class="list-group">
+                            {% for worker in task.assignees.all %}
+                                <li class="list-group-item">
+                                    <a href="{% url 'manager:worker-detail' worker.pk %}">
+                                        {{ worker.get_full_name }} ({{ worker.position }})
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p class="text-center">No one is assigned to this task.</p>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="card card-info">
+                <div class="card-header">
+                    <h3 class="card-title">Task Type</h3>
+                </div>
+                <div class="card-body">
+                    <strong><i class="fas fa-tag mr-1"></i> Name</strong>
+                    <p class="text-muted">{{ task.task_type.name }}</p>
+                    <hr>
+                    <strong><i class="fas fa-info-circle mr-1"></i> Description</strong>
+                    <p class="text-muted">{{ task.task_type.description }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,118 @@
+[
+  {
+    "model": "manager.position",
+    "pk": 1,
+    "fields": {
+      "name": "Developer"
+    }
+  },
+  {
+    "model": "manager.position",
+    "pk": 2,
+    "fields": {
+      "name": "Designer"
+    }
+  },
+  {
+    "model": "manager.worker",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$poKeB9rCInSXfUNjZp3E8P$3X8o2Mry2j8aO8QG8Q7VbTejhsUlAa3Y16aD/qYWwtw=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "alice",
+      "first_name": "Alice",
+      "last_name": "Smith",
+      "email": "alice@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-08-13T12:00:00Z",
+      "position": 1,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "manager.worker",
+    "pk": 2,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$poKeB9rCInSXfUNjZp3E8P$3X8o2Mry2j8aO8QG8Q7VbTejhsUlAa3Y16aD/qYWwtw=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "bob",
+      "first_name": "Bob",
+      "last_name": "Johnson",
+      "email": "bob@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-08-13T12:00:00Z",
+      "position": 2,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "manager.worker",
+    "pk": 3,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$Ru3vSvmoKY9CxvHEjiElYO$bmvb02gfxlwQehaXCb6l9rIu66FpjplOrW1TryVR7gI=",
+      "last_login": null,
+      "is_superuser": true,
+      "username": "admin",
+      "first_name": "Admin",
+      "last_name": "User",
+      "email": "admin@example.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2025-08-13T12:00:00Z",
+      "position": 1,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "manager.tasktype",
+    "pk": 1,
+    "fields": {
+      "name": "Bug Fix"
+    }
+  },
+  {
+    "model": "manager.tasktype",
+    "pk": 2,
+    "fields": {
+      "name": "Feature"
+    }
+  },
+  {
+    "model": "manager.task",
+    "pk": 1,
+    "fields": {
+      "name": "Fix login bug",
+      "description": "Resolve the login page crash issue.",
+      "deadline": "2025-09-01T12:00:00Z",
+      "is_completed": false,
+      "priority": "UG",
+      "task_type": 1,
+      "assignees": [
+        1
+      ]
+    }
+  },
+  {
+    "model": "manager.task",
+    "pk": 2,
+    "fields": {
+      "name": "Create dark mode",
+      "description": "Implement dark mode in the web app.",
+      "deadline": "2025-09-10T12:00:00Z",
+      "is_completed": true,
+      "priority": "HP",
+      "task_type": 2,
+      "assignees": [
+        1,
+        2
+      ]
+    }
+  }
+]
