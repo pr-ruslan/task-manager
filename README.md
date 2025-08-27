@@ -30,7 +30,9 @@ branch. Pull requests are warmly welcome.
 ![Website Interface](demo.png) 
 
 ## Links
-- Check it up https://
+- Check it up https://rddc-task-manager.onrender.com/
+    Test-user login: bob
+    Test-user password: 123
 - Repository: https://github.com/pr-ruslan/task-manager
 
 ## Licensing
